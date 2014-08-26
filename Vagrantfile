@@ -9,10 +9,11 @@ Vagrant.configure("2") do |config|
   # config.vm.boot_mode = :gui
 
   # Port 8000 on the host will go to port 80 on the Vagrant box
+  config.vm.network :private_network, ip: "33.33.33.15"
   config.vm.network :forwarded_port, guest: 80, host: 8000, auto_correct: true
 
   # Here's a folder for passing stuff back and forth
-  config.vm.synced_folder "./shared", "/home/vagrant/host_shared"
+  config.vm.synced_folder "./shared", "/home/vagrant/host_shared", disabled: false
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
